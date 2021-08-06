@@ -6,30 +6,30 @@ import ytdl from "ytdl-core"
 
 const { url, channelId, token } = process.env
 const client = new discord.Client();
-let channel;
-let broadcast = null;
-let interval = null;
+let channel,
+    broadcast = null,
+    interval = null;
 
 if (!token) {
     console.error("token invalido");
-
-} else if (!channelId || Number(channelId) == NaN) {
-    console.log("id do canal errado amigo");
-
+} else if (!channelId || !Number(channelId)) {
+    console.log("id do canal inválido");
 } else if (!ytdl.validateURL(url)) {
-    console.log("link está errado.");
+    console.log("link do vídeo inválido.");
 
 }
 
 client.on('ready', async() => {
     client.user.setActivity("Coding with Lo-fi");
+    
+    
     channel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
 
     if (!channel) {
         console.error("canal não existe");
 
     } else if (channel.type !== "voice") {
-        console.error("id não é de um canal de voz oooo bocó!");
+        console.error("id não é de um canal de voz");
 
     }
 
@@ -41,7 +41,7 @@ client.on('ready', async() => {
         interval = setInterval(async function() {
             try {
                 if (stream && !stream.ended) stream.destroy();
-                stream = ytdl(url, { filter: "audioonly", highWaterMark: 100 << 150 });
+                stream = ytdl(url, { filter: "audioonly", highWaterMark: 1 << 25 });
                 stream.on('error', console.error);
                 broadcast.play(stream);
             } catch (e) { return }
@@ -66,6 +66,6 @@ setInterval(async function() {
             console.error(error);
         }
     }
-}, 20000);
+}, 15000);
 
 client.login(token);
