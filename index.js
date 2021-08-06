@@ -20,11 +20,22 @@ if (!token) {
 }
 
 client.on('ready', async() => {
-    client.user.setActivity("Coding with Lo-fi");
-    
+ 
+    let status = [
+        `⭐Rafaella Ballerini no Youtube!⭐`,
+        `⭐Rafaella Ballerini na Twitch!⭐ `,
+        `⭐Coding with Lo-fi`⭐,
+        `⭐Stream Lo-fi⭐`
+
+    ];
+    let i = 0;
+
+    setInterval(() => client.user.setActivity(`${status[i++ %
+    status.length]}`, {
+        type: 'WATCHING'
+    }), 5000);
     
     channel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
-
     if (!channel) {
         console.error("canal não existe");
 
@@ -32,7 +43,6 @@ client.on('ready', async() => {
         console.error("id não é de um canal de voz");
 
     }
-
     broadcast = client.voice.createBroadcast();
     let stream = ytdl(url);
     stream.on('error', console.error);
