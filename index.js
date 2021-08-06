@@ -6,7 +6,7 @@ import ytdl from "ytdl-core"
 
 const { url, channelId, token } = process.env
 const client = new discord.Client();
-
+let channel;
 let broadcast = null;
 let interval = null;
 
@@ -23,7 +23,7 @@ if (!token) {
 
 client.on('ready', async() => {
     client.user.setActivity("Coding with Lo-fi");
-    let channel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
+    channel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
 
     if (!channel) {
         console.error("canal não existe");
