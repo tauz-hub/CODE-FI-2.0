@@ -1,6 +1,6 @@
 import 'dotenv/config'
 if (process.env.NODE_ENV !== 'production')
-    dotenv.config();
+  dotenv.config();
 import discord from "discord.js"
 import ytdl from "ytdl-core"
 
@@ -20,7 +20,7 @@ if (!token) {
 }
 
 client.on('ready', async() => {
- 
+
     let status = [
         `❤️Rafaella Ballerini on Youtube!❤️`,
         `💜Rafaella Ballerini on Twitch!💜`,
@@ -34,7 +34,7 @@ client.on('ready', async() => {
     status.length]}`, {
         type: 'WATCHING'
     }), 5000);
-    
+
     channel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
     if (!channel) {
         console.error("canal não existe");
@@ -44,16 +44,22 @@ client.on('ready', async() => {
 
     }
     broadcast = client.voice.createBroadcast();
+
+
     let stream = ytdl(url);
+
+
+
     stream.on('error', console.error);
     broadcast.play(stream);
     if (!interval) {
         interval = setInterval(async function() {
             try {
-                if (stream && !stream.ended) stream.destroy();
-                stream = ytdl(url, { filter: "audioonly", highWaterMark: 1 << 25 });
-                stream.on('error', console.error);
-                broadcast.play(stream);
+                if (stream && !stream.ended) {
+                    stream = ytdl(url);
+                    stream.on('error', console.error);
+                    broadcast.play(stream);
+                }
             } catch (e) { return }
         }, 1800000)
     }
