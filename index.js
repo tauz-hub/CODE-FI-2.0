@@ -22,8 +22,8 @@ if (!token) {
 client.on('ready', async() => {
  
     let status = [
-        `❤️Rafaella Ballerini no Youtube!❤️`,
-        `💜Rafaella Ballerini na Twitch!💜`,
+        `❤️Rafaella Ballerini on Youtube!❤️`,
+        `💜Rafaella Ballerini on Twitch!💜`,
         `🎧Coding with Lo-fi!🎧`,
         `⭐Stream Lo-fi!⭐`
 
