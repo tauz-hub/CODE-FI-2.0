@@ -24,8 +24,10 @@ client.on('ready', async() => {
     let status = [
         `❤️Rafaella Ballerini on Youtube!❤️`,
         `💜Rafaella Ballerini on Twitch!💜`,
+        `🧡Rafaella Ballerini on Instagram!🧡`
         `🎧Coding with Lo-fi!🎧`,
-        `⭐Stream Lo-fi!⭐`
+        `⭐Stream Lo-fi!⭐`,
+        `👨‍💻Contact Tauz for questions about me😺`
 
     ];
     let i = 0;
