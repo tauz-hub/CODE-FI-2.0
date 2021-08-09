@@ -63,7 +63,7 @@ client.on('ready', async() => {
                     broadcast.play(stream);
                 }
             } catch (e) { return }
-        }, 1200000)
+        }, 900000)
     }
     try {
         const connection = await channel.join();
