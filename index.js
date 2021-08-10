@@ -61,6 +61,8 @@ client.on('ready', async() => {
                     stream = ytdl(url);
                     stream.on('error', console.error);
                     broadcast.play(stream);
+                    let idchannel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
+                    idchannel.leave()
                 }
             } catch (e) { return }
         }, 900000)
@@ -84,6 +86,6 @@ setInterval(async function() {
             console.error(error);
         }
     }
-}, 15000);
+}, 2000);
 
 client.login(token);
