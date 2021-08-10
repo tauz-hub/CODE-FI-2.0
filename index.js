@@ -1,6 +1,6 @@
 import 'dotenv/config'
 if (process.env.NODE_ENV !== 'production')
-  dotenv.config();
+   dotenv.config();
 import discord from "discord.js"
 import ytdl from "ytdl-core"
 
@@ -8,6 +8,7 @@ const { url, channelId, token } = process.env
 const client = new discord.Client();
 let channel,
     broadcast = null,
+    stream = ytdl(url),
     interval = null;
 
 if (!token) {
@@ -46,26 +47,16 @@ client.on('ready', async() => {
 
     }
     broadcast = client.voice.createBroadcast();
-
-
-    let stream = ytdl(url);
-
-
-
     stream.on('error', console.error);
     broadcast.play(stream);
     if (!interval) {
         interval = setInterval(async function() {
             try {
-                if (stream && !stream.ended) {
-                    stream = ytdl(url);
-                    stream.on('error', console.error);
-                    broadcast.play(stream);
-                    let idchannel = client.channels.cache.get(channelId) || await client.channels.fetch(channelId);
-                    idchannel.leave()
-                }
+                channel.leave()
+                const connection = await channel.join();
+                connection.play(broadcast);
             } catch (e) { return }
-        }, 900000)
+        }, 1200000)
     }
     try {
         const connection = await channel.join();
@@ -77,7 +68,7 @@ client.on('ready', async() => {
 
 setInterval(async function() {
     if (!client.voice.connections.size) {
-  console.log("desconectado")
+        console.log("desconectado")
         if (!channel) return;
         try {
             const connection = await channel.join();
