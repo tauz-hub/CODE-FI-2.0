@@ -53,7 +53,7 @@ client.on('ready', async() => {
                 channel.leave()
                 const connection = await channel.join();
                 connection.play(broadcast);
-            } catch (e) { return }
+            } catch (e) { return channel.leave() }
         }, 1200000)
     }
     try {
@@ -61,6 +61,7 @@ client.on('ready', async() => {
         connection.play(broadcast);
     } catch (error) {
         console.error(error);
+        channel.leave()
     }
 });
 
@@ -73,6 +74,7 @@ setInterval(async function() {
             connection.play(broadcast);
         } catch (error) {
             console.error(error);
+            channel.leave()
         }
     }
 }, 500);
