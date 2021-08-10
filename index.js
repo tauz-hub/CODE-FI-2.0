@@ -17,7 +17,6 @@ if (!token) {
     console.log("id do canal inválido");
 } else if (!ytdl.validateURL(url)) {
     console.log("link do vídeo inválido.");
-
 }
 
 client.on('ready', async() => {
@@ -29,7 +28,6 @@ client.on('ready', async() => {
         `🎧Coding with Lo-fi!🎧`,
         `⭐Stream Lo-fi!⭐`,
         `👨‍💻Contact Tauz for questions about me😺`
-
     ];
     let i = 0;
 
