@@ -77,7 +77,7 @@ client.on('ready', async() => {
 
 setInterval(async function() {
     if (!client.voice.connections.size) {
-
+  console.log("desconectado")
         if (!channel) return;
         try {
             const connection = await channel.join();
@@ -86,6 +86,6 @@ setInterval(async function() {
             console.error(error);
         }
     }
-}, 2000);
+}, 500);
 
 client.login(token);
