@@ -1,6 +1,6 @@
 import 'dotenv/config'
 if (process.env.NODE_ENV !== 'production')
-   dotenv.config();
+ dotenv.config();
 import discord from "discord.js"
 import ytdl from "ytdl-core"
 
@@ -51,8 +51,15 @@ client.on('ready', async() => {
         interval = setInterval(async function() {
             try {
                 channel.leave()
+                stream = ytdl(url)
+                broadcast = client.voice.createBroadcast();
+                stream.on('error', console.error);
+                broadcast.play(stream);
+
+
                 const connection = await channel.join();
                 connection.play(broadcast);
+                console.log("broadcast conectado depois do maior intervalo")
             } catch (e) { return channel.leave() }
         }, 1200000)
     }
@@ -70,8 +77,14 @@ setInterval(async function() {
         console.log("desconectado")
         if (!channel) return;
         try {
+            stream = ytdl(url)
+            broadcast = client.voice.createBroadcast();
+            stream.on('error', console.error);
+            broadcast.play(stream);
+
             const connection = await channel.join();
             connection.play(broadcast);
+            console.log("broadcast conectado pois foi forçado a parar")
         } catch (error) {
             console.error(error);
             channel.leave()
