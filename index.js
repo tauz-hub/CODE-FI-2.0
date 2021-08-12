@@ -50,7 +50,7 @@ client.on('ready', async() => {
     if (!interval) {
         interval = setInterval(async function() {
             try {
-                //channel.leave()
+                channel.leave()
                 stream = ytdl(url)
                 broadcast = client.voice.createBroadcast();
                 stream.on('error', console.error);
