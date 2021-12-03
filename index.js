@@ -1,6 +1,4 @@
 import 'dotenv/config'
-//if (process.env.NODE_ENV !== 'production')
- //dotenv.config();
 import discord from "discord.js"
 import ytdl from "ytdl-core"
 
